@@ -127,6 +127,7 @@ class Detector:
                 keyword_list,keyword_weights = self.LDA_keyword()
                 print 'keywords: ', keyword_list
                 print '-------------------------'
+
                 #计算相关度
                 similarity = self.getSimilarity(keyword_list)
                 end = time.clock()
