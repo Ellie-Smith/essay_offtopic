@@ -77,9 +77,11 @@ def getKeywords(themePath,theme_word_path,keywords_path):
 
 def getKeyword_list(keywords):
     keyword_list = []
+    keyword_weight = []
     for i in keywords:
         keyword_list.append(i[1])
-    return  keyword_list
+        keyword_weight.append(float(i[0]))
+    return  keyword_list,keyword_weight
 
 def runLDA():
     dpre = lda2.preprocessing()

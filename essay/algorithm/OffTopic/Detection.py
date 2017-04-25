@@ -83,7 +83,7 @@ class Detector:
         theme_word_path = 'algorithm/OffTopic/KeyWord/LDA/data/tmp/model_twords.dat'
         keywords_path = 'algorithm/OffTopic/KeyWord/LDA/data/tmp/main.txt'
         keywords = KeyWord.LDA.pickKeyword.getKeywords(themePath, theme_word_path, keywords_path)  # here!
-        keyword_list = KeyWord.LDA.pickKeyword.getKeyword_list(keywords)
+        keyword_list,keyword_weights = KeyWord.LDA.pickKeyword.getKeyword_list(keywords)
         return keyword_list
     def TextRank_keyword(self,article):
         # 提取关键词（TextRank）
@@ -122,9 +122,9 @@ class Detector:
                 f.write(' ')
             f.close()
             print 'PreProcess finished'
-
+            keyword_weights = []
             if method == 'LDA':
-                keyword_list = self.LDA_keyword()
+                keyword_list,keyword_weights = self.LDA_keyword()
                 print 'keywords: ', keyword_list
                 print '-------------------------'
                 #计算相关度
@@ -139,7 +139,7 @@ class Detector:
                 end = time.clock()
                 print 'Run time:', (end - start)
                 print 'similarity=', similarity
-        return similarity
+        return similarity,keyword_list,keyword_weights,self.title_expandlist
 
 if __name__ == '__main__':
     title = 'global shortage of fresh water'
